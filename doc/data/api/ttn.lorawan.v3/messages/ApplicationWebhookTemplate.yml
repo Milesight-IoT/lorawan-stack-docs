@@ -41,10 +41,16 @@ fields:
 - name: headers
   comment: The HTTP headers used by the template. Both the key and the value can contain
     template fields.
+  rules:
+    max_pairs: 50
   map_key:
     type: string
+    rules:
+      max_len: 64
   map_value:
     type: string
+    rules:
+      max_len: 256
   default: {}
 - name: format
   type: string
@@ -62,6 +68,10 @@ fields:
   type: bool
   default: false
 - name: uplink_message
+  message:
+    name: ApplicationWebhookTemplate.Message
+  default: {}
+- name: uplink_normalized
   message:
     name: ApplicationWebhookTemplate.Message
   default: {}
@@ -100,4 +110,9 @@ fields:
 - name: service_data
   message:
     name: ApplicationWebhookTemplate.Message
+  default: {}
+- name: field_mask
+  message:
+    package: google.protobuf
+    name: FieldMask
   default: {}

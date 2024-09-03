@@ -20,16 +20,16 @@ The CLI comes with builtin documentation. This documentation can be printed by a
 
 Many CLI commands names have aliases, which are different spellings or shorter versions of the same command. For instance, `applications` commands can also be written as `application`, `apps`, `app` or even `a`. This could save you some typing if you frequently use the CLI.
 
-{{< note >}} For even less typing you could also register an alias for `ttn-lw-cli` itself (`alias tt=ttn-lw-cli`). {{</ note >}}
+For even less typing you could also register an alias for `ttn-lw-cli` itself (`alias tt=ttn-lw-cli`).
 
 ## Input and Output Formats
 
-By default the CLI outputs results as one or more JSON objects. These JSON objects are equivalent to the JSON objects that would be returned when using the HTTP API of {{% tts %}}. Some commands accept one or more JSON objects as input. These JSON objects are equivalent to the JSON objects that can be sent to the HTTP API. This way of handling input and output is used by the [End Device Templates feature]({{< ref "/devices/end-device-templates" >}}).
+By default the CLI outputs results as one or more JSON objects. These JSON objects are equivalent to the JSON objects that would be returned when using the HTTP API of {{% tts %}}. Some commands accept one or more JSON objects as input. These JSON objects are equivalent to the JSON objects that can be sent to the HTTP API.
 
 The `--output-format` flag allows you to specify a [Go template](https://golang.org/pkg/text/template/) that is executed for the result(s) of a command. The example below executes lists applications and outputs their IDs and names:
 
 ```bash
-$ ttn-lw-cli applications list --name --output-format "{{ .ApplicationID }}: {{ .Name }}"
+ttn-lw-cli applications list --name --output-format "{{ .ApplicationID }}: {{ .Name }}"
 ```
 
 ## Login and Logout
@@ -50,7 +50,7 @@ When creating an application or gateway, you need to specify a user or organizat
 
 When creating an end device, you need to specify an application in which the end device should be created.
 
-All other flags correspond to the fields of the entity, as can be seen with the `--help` flag and in the [API Reference]({{< ref "/reference/api" >}}).
+All other flags correspond to the fields of the entity, as can be seen with the `--help` flag and in the [API Reference]({{< ref "/api/reference/grpc" >}}).
 
 ### Getting or Listing Entities
 
@@ -78,12 +78,12 @@ API keys can be `create`d, `list`ed, `update`d and `delete`d. Creating an API ke
 
 ## Uplink Traffic
 
-The CLI can be used to subscribe to uplink traffic. See the [Getting Started guide]({{< ref "/getting-started/cli" >}}) for more details.
+The CLI can be used to subscribe to uplink traffic. See the [Getting Started guide]({{< ref "/the-things-stack/interact/cli" >}}) for more details.
 
 ## Downlink Queue
 
-The CLI can manage the downlink queue of end devices. See the [Downlink Queue Operations guide]({{< ref "/devices/downlink-queue-ops" >}}) for more details.
+The CLI can manage the downlink queue of end devices. See the [Downlink Queue Operations guide]({{< ref "/devices/configuring-devices/downlink-queue-ops" >}}) for more details.
 
 ## Events
 
-The CLI can be used to subscribe to events. See the [Events guide]({{< ref "/getting-started/events" >}}) for more details.
+The CLI can be used to subscribe to events. See the [Events guide]({{< ref "/the-things-stack/management/events" >}}) for more details.

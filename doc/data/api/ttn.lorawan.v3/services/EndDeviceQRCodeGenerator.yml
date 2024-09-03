@@ -1,4 +1,6 @@
 name: EndDeviceQRCodeGenerator
+comment: The EndDeviceQRCodeGenerator service provides functionality to generate and
+  parse QR codes.
 methods:
   GetFormat:
     name: GetFormat
@@ -31,3 +33,16 @@ methods:
     http:
     - method: POST
       path: /qr-codes/end-devices
+  Parse:
+    name: Parse
+    comment: Parse QR Codes of known formats and return the information contained
+      within.
+    input:
+      name: ParseEndDeviceQRCodeRequest
+    output:
+      name: ParseEndDeviceQRCodeResponse
+    http:
+    - method: POST
+      path: /qr-codes/end-devices/parse
+    - method: POST
+      path: /qr-codes/end-devices/{format_id}/parse

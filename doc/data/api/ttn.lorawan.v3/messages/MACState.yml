@@ -100,7 +100,7 @@ fields:
     The number of messages stored may depend on configuration.
   repeated:
     message:
-      name: UplinkMessage
+      name: MACState.UplinkMessage
   default: []
 - name: recent_downlinks
   comment: |-
@@ -108,7 +108,7 @@ fields:
     The number of messages stored may depend on configuration.
   repeated:
     message:
-      name: DownlinkMessage
+      name: MACState.DownlinkMessage
   default: []
 - name: last_network_initiated_downlink_at
   comment: Time when the last network-initiated downlink message was scheduled.
@@ -165,3 +165,20 @@ fields:
   comment: Frame counter of uplink, which confirmed the last ADR parameter change.
   type: uint32
   default: 0
+- name: recent_mac_command_identifiers
+  comment: |-
+    MAC command identifiers sent by the end device in the last received uplink.
+    The Network Server may choose to store only certain types of MAC
+    command identifiers in the underlying implementation.
+  repeated:
+    enum:
+      name: MACCommandIdentifier
+  default: []
+- name: pending_relay_downlink
+  comment: |-
+    Pending relay downlink contents.
+    The pending downlink will be scheduled to the relay in either Rx1 or Rx2.
+    The pending downlink will be cleared after the scheduling attempt.
+  message:
+    name: RelayForwardDownlinkReq
+  default: {}

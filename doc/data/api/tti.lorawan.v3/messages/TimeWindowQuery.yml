@@ -1,0 +1,17 @@
+name: TimeWindowQuery
+comment: Request for data in a specific time window.
+fields:
+- name: from
+  message:
+    package: google.protobuf
+    name: Timestamp
+  rules:
+    required: true
+  default: "0001-01-01T00:00:00Z"
+- name: to
+  message:
+    package: google.protobuf
+    name: Timestamp
+  rules:
+    required: true
+  default: "0001-01-01T00:00:00Z"

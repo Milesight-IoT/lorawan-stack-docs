@@ -71,6 +71,14 @@ methods:
     http:
     - method: PUT
       path: /applications/{end_device.ids.application_ids.application_id}/devices/{end_device.ids.device_id}
+  BatchUpdateLastSeen:
+    name: BatchUpdateLastSeen
+    comment: Update the last seen timestamp for a batch of end devices.
+    input:
+      name: BatchUpdateEndDeviceLastSeenRequest
+    output:
+      package: google.protobuf
+      name: Empty
   Delete:
     name: Delete
     comment: |-
@@ -78,6 +86,8 @@ methods:
 
       Before deleting an end device it first needs to be deleted from the
       NsEndDeviceRegistry, the AsEndDeviceRegistry and the JsEndDeviceRegistry.
+      In addition, if the device claimed on a Join Server, it also needs to be
+      unclaimed via the DeviceClaimingServer so it can be claimed in the future.
       This is NOT done automatically.
     input:
       name: EndDeviceIdentifiers

@@ -4,6 +4,10 @@
 
 @import "vendor/bulma/sass/utilities/initial-variables";
 
+// TTUI cannot be inmported currently because of an issue with the
+// hugo built-in SCSS transpiler with the minified CSS output.
+// @import '@tti/design/ui/main';
+
 @import "common/fonts";
 @import "common/variables";
 
@@ -14,9 +18,12 @@
 @import "common/global";
 @import "common/tabs";
 @import "footer/footer";
+@import "pages/homepage";
 @import "header/nav";
 @import "sidebar/sidebar";
 @import "schema/schema";
+@import "shortcodes/openapi";
+@import "shortcodes/messages";
 
 @import "highlight";
 

@@ -58,11 +58,50 @@ fields:
       max_len: 200
   default: {}
 - name: contact_info
-  comment: Contact information for this organization. Typically used to indicate who
-    to contact with security/billing questions about the organization.
+  comment: |-
+    Contact information for this organization. Typically used to indicate who to contact with security/billing questions about the organization.
+    This field is deprecated. Use administrative_contact and technical_contact instead.
   rules:
     max_items: 10
   repeated:
     message:
       name: ContactInfo
   default: []
+- name: administrative_contact
+  message:
+    name: OrganizationOrUserIdentifiers
+  default: {}
+- name: technical_contact
+  message:
+    name: OrganizationOrUserIdentifiers
+  default: {}
+- name: application_limit
+  comment: |-
+    The maximum number of applications of the organization.
+    This field can only be modified by admins.
+  message:
+    package: google.protobuf
+    name: UInt64Value
+  default: null
+- name: client_limit
+  comment: |-
+    The maximum number of clients of the organization.
+    This field can only be modified by admins.
+  message:
+    package: google.protobuf
+    name: UInt64Value
+  default: null
+- name: gateway_limit
+  comment: |-
+    The maximum number of gateways of the organization.
+    This field can only be modified by admins.
+  message:
+    package: google.protobuf
+    name: UInt64Value
+  default: null
+- name: fanout_notifications
+  comment: |-
+    Determines if a notification will be sent to the collaborators. If false it, notifications will be sent only to the
+    administrative or technical contact.
+  type: bool
+  default: false

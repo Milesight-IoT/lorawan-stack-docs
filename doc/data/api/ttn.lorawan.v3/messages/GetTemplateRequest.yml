@@ -4,11 +4,16 @@ fields:
   comment: Application identifiers.
   message:
     name: ApplicationIdentifiers
-  rules:
-    required: true
   default: {}
 - name: version_ids
-  comment: End device version information.
+  comment: |-
+    End device version information.
+    Use either EndDeviceVersionIdentifiers or EndDeviceProfileIdentifiers.
   message:
     name: EndDeviceVersionIdentifiers
+  default: {}
+- name: end_device_profile_ids
+  comment: End device profile identifiers.
+  message:
+    name: GetTemplateRequest.EndDeviceProfileIdentifiers
   default: {}

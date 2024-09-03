@@ -1,0 +1,34 @@
+name: GatewayConnectivityTimes
+comment: Connectivity times of a gateway.
+fields:
+- name: gateway_ids
+  message:
+    package: ttn.lorawan.v3
+    name: GatewayIdentifiers
+  rules:
+    required: true
+  default: {}
+- name: last_connect
+  message:
+    package: google.protobuf
+    name: Timestamp
+  default: "0001-01-01T00:00:00Z"
+- name: last_disconnect
+  message:
+    package: google.protobuf
+    name: Timestamp
+  default: "0001-01-01T00:00:00Z"
+- name: uptime
+  comment: |-
+    Fraction of time that the gateway was active.
+    This is typically aggregated in time buckets of at least 5 minutes or 1 hour depending on the query window.
+  type: float
+  default: 0
+- name: packet_rate_last_hour
+  comment: Packet rate (uplink and downlink) of the last hour.
+  type: float
+  default: 0
+- name: disconnects
+  comment: Number of disconnects.
+  type: uint64
+  default: 0

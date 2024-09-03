@@ -27,14 +27,14 @@ fields:
     Frequency of the class B ping slot (Hz).
     If unset, the default value from Network Server configuration will be used.
   message:
-    name: FrequencyValue
+    name: ZeroableFrequencyValue
   default: {}
 - name: beacon_frequency
   comment: |-
     Frequency of the class B beacon (Hz).
     If unset, the default value from Network Server configuration will be used.
   message:
-    name: FrequencyValue
+    name: ZeroableFrequencyValue
   default: {}
 - name: class_c_timeout
   comment: |-
@@ -96,15 +96,15 @@ fields:
 - name: use_adr
   comment: |-
     Whether the Network Server should use ADR for the device.
-    If unset, the default value from Network Server configuration will be used.
+    This field is deprecated, use adr_settings instead.
   message:
     name: BoolValue
   default: {}
 - name: adr_margin
   comment: |-
-    The ADR margin tells the network server how much margin it should add in ADR requests.
+    The ADR margin (dB) tells the network server how much margin it should add in ADR requests.
     A bigger margin is less efficient, but gives a better chance of successful reception.
-    If unset, the default value from Network Server configuration will be used.
+    This field is deprecated, use adr_settings.dynamic.margin instead.
   message:
     package: google.protobuf
     name: FloatValue
@@ -193,14 +193,14 @@ fields:
     The frequency of the class B ping slot (Hz) Network Server should configure device to use via MAC commands.
     If unset, the default value from Network Server configuration or regional parameters specification will be used.
   message:
-    name: FrequencyValue
+    name: ZeroableFrequencyValue
   default: {}
 - name: desired_beacon_frequency
   comment: |-
     The frequency of the class B beacon (Hz) Network Server should configure device to use via MAC commands.
     If unset, the default value from Network Server configuration will be used.
   message:
-    name: FrequencyValue
+    name: ZeroableFrequencyValue
   default: {}
 - name: desired_max_eirp
   comment: |-
@@ -216,3 +216,46 @@ fields:
     package: google.protobuf
     name: Duration
   default: 0s
+- name: uplink_dwell_time
+  comment: |-
+    Whether uplink dwell time is set (400ms).
+    If unset, the default value from Network Server configuration or regional parameters specification will be used.
+  message:
+    name: BoolValue
+  default: {}
+- name: downlink_dwell_time
+  comment: |-
+    Whether downlink dwell time is set (400ms).
+    If unset, the default value from Network Server configuration or regional parameters specification will be used.
+  message:
+    name: BoolValue
+  default: {}
+- name: adr
+  comment: |-
+    Adaptive Data Rate settings.
+    If unset, the default value from Network Server configuration or regional parameters specification will be used.
+  message:
+    name: ADRSettings
+  default: {}
+- name: schedule_downlinks
+  comment: |-
+    Whether or not downlink messages should be scheduled.
+    This option can be used in order to disable any downlink interaction with the end device. It will affect all types
+    of downlink messages: data and MAC downlinks, and join accepts.
+  message:
+    name: BoolValue
+  default: {}
+- name: relay
+  comment: |-
+    The relay settings the end device is using.
+    If unset, the default value from Network Server configuration or regional parameters specification will be used.
+  message:
+    name: RelaySettings
+  default: {}
+- name: desired_relay
+  comment: |-
+    The relay settings the Network Server should configure device to use via MAC commands.
+    If unset, the default value from Network Server configuration or regional parameters specification will be used.
+  message:
+    name: RelaySettings
+  default: {}

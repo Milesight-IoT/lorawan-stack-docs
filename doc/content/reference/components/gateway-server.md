@@ -10,7 +10,7 @@ The Gateway Server maintains connections with gateways supporting the Basic Stat
 
 ## Connectivity
 
-Gateways can connect to Gateway Servers over multiple protocols. See [Networking]({{< ref "/reference/networking" >}}).
+Gateways can connect to Gateway Servers over multiple protocols. See [Networking]({{< ref "/the-things-stack/concepts/networking" >}}).
 
 ### Basic Station Protocol
 
@@ -26,13 +26,13 @@ Older versions of packet forwarders implementing the UDP protocol do not impleme
 
 ### MQTT Protocol
 
-Gateways can connect to a Gateway Server by exchanging [Protocol Buffers](https://developers.google.com/protocol-buffers) over MQTT. MQTT is available over TLS, providing confidentiality of messages exchanged between the gateway and the network. The encoding with protocol buffers reduces bandwidth usage compared to the UDP protocol, which uses JSON encoding. See [Gateway Server MQTT Protocol]({{< ref "/reference/api/gateway_server_mqtt" >}}) for technical details.
+Gateways can connect to a Gateway Server by exchanging [Protocol Buffers](https://developers.google.com/protocol-buffers) over MQTT. MQTT is available over TLS, providing confidentiality of messages exchanged between the gateway and the network. The encoding with protocol buffers reduces bandwidth usage compared to the UDP protocol, which uses JSON encoding. See [Gateway Server MQTT Protocol]({{< ref "/api/concepts/lora-gateway" >}}) for technical details.
 
 Packet forwarders implementing the MQTT protocols are specific for {{% tts %}}.
 
 ## Gateway Information
 
-While a gateway is connected, the Gateway Server collects statistics about the messages exchanged with the gateway, and about the status messages sent by the gateway. Those statistics can be retrieved from the Gateway Server using its gRPC and HTTP APIs. See [`Gs` service]({{< ref "/reference/api/gateway_server#Gs" >}}).
+While a gateway is connected, the Gateway Server collects statistics about the messages exchanged with the gateway, and about the status messages sent by the gateway. Those statistics can be retrieved from the Gateway Server using its gRPC and HTTP APIs. See [`Gs` service]({{< ref "/api/reference/grpc/gateway_server#Gs" >}}).
 
 ## Communication with Network Server
 
@@ -44,7 +44,7 @@ When receiving a data uplink message, the Gateway Server decides which Network S
 
 ### Downlink Messages
 
-Network Servers can request transmission for downlink messages. The Gateway Server attempts to schedule the message based on the selected gateways, time to send the message and LoRaWAN settings (downlink class, RX1 delay and RX1/RX2 data rates and frequencies).
+Network Servers can request transmission for downlink messages. The Gateway Server attempts to schedule the message based on the selected gateways, time to send the message and LoRaWAN® settings (downlink class, RX1 delay and RX1/RX2 data rates and frequencies).
 
 The Gateway Server keeps track of all downlinks emitted and to be emitted by gateways connected to it, including the exact time-on-air based on message size and data rate. This allows {{% tts %}} to do smart scheduling. Besides timing and LoRaWAN settings, the Gateway Server takes applicable limitations into account, including:
 

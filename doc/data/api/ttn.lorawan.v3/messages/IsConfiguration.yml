@@ -20,3 +20,35 @@ fields:
   message:
     name: IsConfiguration.UserLogin
   default: {}
+- name: admin_rights
+  message:
+    name: IsConfiguration.AdminRights
+  default: {}
+- name: admin_restrictions
+  message:
+    name: IsConfiguration.AdminRestrictions
+  default: {}
+- name: network_limits
+  message:
+    name: IsConfiguration.NetworkLimits
+  default: {}
+- name: application_limits
+  message:
+    name: IsConfiguration.ApplicationLimits
+  default: {}
+- name: organization_limits
+  message:
+    name: IsConfiguration.OrganizationLimits
+  default: {}
+- name: user_limits
+  message:
+    name: IsConfiguration.UserLimits
+  default: {}
+- name: collaborator_rights
+  message:
+    name: IsConfiguration.CollaboratorRights
+  default: {}
+- name: tenant_registration
+  message:
+    name: IsConfiguration.TenantRegistration
+  default: {}

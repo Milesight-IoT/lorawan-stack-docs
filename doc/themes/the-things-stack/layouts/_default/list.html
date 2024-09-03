@@ -14,7 +14,7 @@
         <h1 class="title is-size-2">{{ .Title }}
           {{ $context := . }}
         </h1>
-        {{ if or .Params.distributions (or .Params.new_in_version .Params.deprecated_in_version) }}
+        {{ if or .Params.distributions (or .Params.new_in_version .Params.deprecated_in_version .Params.removed_in_version) }}
         <h2 class="subtitle">
           {{ with .Params.distributions }}
             {{ $distributions := .}}
@@ -26,14 +26,15 @@
           {{ with .Params.deprecated_in_version }}
             {{ partial "deprecated-in-version" .}}
           {{ end }}
+          {{ with .Params.removed_in_version }}
+            {{ partial "removed-in-version" .}}
+          {{ end }}
         </h2>
         {{ end }}
         <div class="content">
           {{ .Content }}
         </div>
-        {{ if and .Pages (not (eq .Parent .FirstSection)) }}
           {{ partial "pages-cards.html" .Pages }}
-        {{ end }}
           {{ partial "prev-next-in-section" . }}
           {{ partial "feedback" . }}
         </div>

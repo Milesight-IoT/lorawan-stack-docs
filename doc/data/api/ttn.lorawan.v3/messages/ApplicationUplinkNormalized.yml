@@ -1,0 +1,96 @@
+name: ApplicationUplinkNormalized
+fields:
+- name: session_key_id
+  comment: Join Server issued identifier for the session keys used by this uplink.
+  type: bytes
+  rules:
+    max_len: 2048
+  default: ""
+- name: f_port
+  comment: LoRaWAN FPort of the uplink message.
+  type: uint32
+  rules:
+    lte: 255
+    gte: 1
+    not_in:
+    - 224
+  default: 0
+- name: f_cnt
+  comment: LoRaWAN FCntUp of the uplink message.
+  type: uint32
+  default: 0
+- name: frm_payload
+  comment: |-
+    The frame payload of the uplink message.
+    This field is always decrypted with AppSKey.
+  type: bytes
+  default: ""
+- name: normalized_payload
+  comment: |-
+    The normalized frame payload of the uplink message.
+    This field is set for each item in normalized_payload in the corresponding ApplicationUplink message.
+  message:
+    package: google.protobuf
+    name: Struct
+  rules:
+    required: true
+  default: {}
+- name: normalized_payload_warnings
+  comment: This field is set to normalized_payload_warnings in the corresponding ApplicationUplink
+    message.
+  repeated:
+    type: string
+  default: []
+- name: rx_metadata
+  comment: A list of metadata for each antenna of each gateway that received this
+    message.
+  repeated:
+    message:
+      name: RxMetadata
+  default: []
+- name: settings
+  comment: Transmission settings used by the end device.
+  message:
+    name: TxSettings
+  rules:
+    required: true
+  default: {}
+- name: received_at
+  comment: Server time when the Network Server received the message.
+  message:
+    package: google.protobuf
+    name: Timestamp
+  rules:
+    required: true
+  default: "0001-01-01T00:00:00Z"
+- name: confirmed
+  comment: Indicates whether the end device used confirmed data uplink.
+  type: bool
+  default: false
+- name: consumed_airtime
+  comment: Consumed airtime for the transmission of the uplink message. Calculated
+    by Network Server using the raw payload size and the transmission settings.
+  message:
+    package: google.protobuf
+    name: Duration
+  default: 0s
+- name: locations
+  comment: End device location metadata, set by the Application Server while handling
+    the message.
+  map_key:
+    type: string
+  map_value:
+    message:
+      name: Location
+  default: {}
+- name: version_ids
+  comment: End device version identifiers, set by the Application Server while handling
+    the message.
+  message:
+    name: EndDeviceVersionIdentifiers
+  default: {}
+- name: network_ids
+  comment: Network identifiers, set by the Network Server that handles the message.
+  message:
+    name: NetworkIdentifiers
+  default: {}

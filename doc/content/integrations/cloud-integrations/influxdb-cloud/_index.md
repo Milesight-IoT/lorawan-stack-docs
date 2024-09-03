@@ -11,7 +11,7 @@ aliases: ["/integrations/cloud-integrations/influxdb-cloud/influxdb-cloud-setup"
 
 Besides being able to send data to InfluxDB Cloud 2.0, [Telegraf agent](https://www.influxdata.com/time-series-platform/telegraf/) can also be configured to subscribe to messages published by {{% tts %}} [MQTT server]({{< ref "/integrations/mqtt" >}}) or to listen to messages sent by {{% tts %}} Application Server via [HTTP Webhooks]({{< ref "/integrations/webhooks" >}}). This guide contains the instructions for both of these implementations.
 
-{{< note >}} For additional info on configuring the Telegraf agent and using its plugins, check out the [official documentation](https://v2.docs.influxdata.com/v2.0/write-data/no-code/use-telegraf/). {{</ note >}}
+For additional info on configuring the Telegraf agent and using its plugins, check out the [official documentation](https://v2.docs.influxdata.com/v2.0/write-data/no-code/use-telegraf/).
 
 ## Prerequisites
 
@@ -82,13 +82,13 @@ Once you have downloaded the Telegraf configuration file as described in [Influx
 Next, you need to copy the previously generated token from the **Tokens** tab and export it to an environmental variable to be used by the InfluxDB **output plugin**, or you can simply pass it directly as a `token` value in the configuration file. You can set the environmental variable by using the following command in your terminal:
 
 ```bash
-$ export INFLUX_TOKEN="paste your token here"
+INFLUX_TOKEN="paste your token here"
 ```
 
 Run the Telegraf agent in your terminal with the following command:
 
 ```bash
-$ telegraf --config /path/to/custom/telegraf.conf
+telegraf --config /path/to/custom/telegraf.conf
 ```
 
 ## Configure Telegraf and The Things Stack for Webhook Integration
@@ -119,19 +119,19 @@ Update the Telegraf configuration you previously downloaded as described in [Inf
 Copy the generated token from the **Tokens** tab and use it as a `token` value for the **output plugin** in your Telegraf configuration file, or export it to an environmental variable with the following command in your terminal:
 
 ```bash
-$ export INFLUX_TOKEN="paste your token here"
+INFLUX_TOKEN="paste your token here"
 ```
 
 Start the Telegraf agent by running the following command in the terminal:
 
 ```bash
-$ telegraf --config /path/to/custom/telegraf.conf
+telegraf --config /path/to/custom/telegraf.conf
 ```
 In {{% tts %}} Console, [create a new webhook]({{< ref "/integrations/webhooks/creating-webhooks" >}}) with JSON **Webhook format**, set the **Base URL** to `http://localhost:8080/telegraf` and tick the box next to the message types you want to enable this webhook for.
 
 {{< figure src="tts-webhook-info.png" alt="Creating webhook on The Things Stack" >}}
 
-{{< note >}} Keep in mind that Telegraf agent can be hosted in a remote environment as well. In that case, you need to adjust the **Base URL** according to your setup. {{</ note >}}
+Keep in mind that Telegraf agent can be hosted in a remote environment as well. In that case, you need to adjust the **Base URL** according to your setup.
 
 ## Monitor Your Data
 

@@ -23,6 +23,10 @@ fields:
   message:
     name: ApplicationUplink
   default: {}
+- name: uplink_normalized
+  message:
+    name: ApplicationUplinkNormalized
+  default: {}
 - name: join_accept
   message:
     name: ApplicationJoinAccept
@@ -60,13 +64,16 @@ fields:
     name: ApplicationServiceData
   default: {}
 - name: simulated
-  comment: Signals if the message is coming from the Network Server or is simulated.
+  comment: |-
+    Signals if the message is coming from the Network Server or is simulated.
+    The Application Server automatically sets this field, and callers must not manually set it.
   type: bool
   default: false
 oneofs:
 - name: up
   field_names:
   - uplink_message
+  - uplink_normalized
   - join_accept
   - downlink_ack
   - downlink_nack

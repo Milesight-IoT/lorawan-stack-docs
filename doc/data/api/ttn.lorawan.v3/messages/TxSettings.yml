@@ -11,20 +11,11 @@ fields:
   rules:
     required: true
   default: {}
-- name: data_rate_index
-  comment: LoRaWAN data rate index.
-  enum:
-    name: DataRateIndex
-  rules:
-    defined_only: true
-  default: DATA_RATE_0
-- name: coding_rate
-  comment: LoRa coding rate.
-  type: string
-  default: ""
 - name: frequency
   comment: Frequency (Hz).
   type: uint64
+  rules:
+    gte: 100000
   default: 0
 - name: enable_crc
   comment: Send a CRC in the packet; only on uplink; on downlink, CRC should not be
@@ -50,3 +41,10 @@ fields:
   message:
     name: TxSettings.Downlink
   default: {}
+- name: concentrator_timestamp
+  comment: |-
+    Concentrator timestamp for the downlink as calculated by the Gateway Server scheduler.
+    This value takes into account necessary offsets such as the RTT (Round Trip Time) and TOA (Time Of Arrival).
+    This field is set and used only by the Gateway Server.
+  type: int64
+  default: 0

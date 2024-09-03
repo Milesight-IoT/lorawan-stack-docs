@@ -55,9 +55,14 @@
       }
     }
 
-    & > img {
-      max-height: 500px;
-      object-fit: contain;
+    &.logo {
+      max-width: 40%;
+      @media (max-width: 500px) {
+        max-width: 60%;
+      }
+      @media (min-width: 830px) {
+        max-width: 30%;
+      }
     }
 
     &:not(.plain) > img {
@@ -69,7 +74,15 @@
     display: block;
     overflow: auto;
   }
-
+  a:link{
+    color: $blue;
+  }
+  a:hover{
+    text-decoration: underline;
+  }
+  a:visited{
+    color: $blue-secondary;
+  }
 }
 
 details + p {
@@ -114,21 +127,16 @@ table.fixed td { overflow: auto; }
 
 // Fix for anchor link headbutting https://css-tricks.com/hash-tag-links-padding/
 .content {
-  h2::before, h3::before, h4::before {
-    display: block;
-    content: " ";
-    margin-top: -$navbar-height - 1rem;
-    height: $navbar-height + 1rem;
-    visibility: hidden;
-    pointer-events: none;
-    z-index: -1;
+  h2, h3, h4 {
+    scroll-margin-top: 0.25em;
   }
 }
 
 .badge-stack {
   margin-left: .25em;
-  vertical-align: middle;
   white-space: nowrap;
+  display: flex;
+  flex-direction: row;
 }
 
 .badge-stack .badge {
@@ -136,15 +144,15 @@ table.fixed td { overflow: auto; }
   width: 1em;
 }
 
-.badge-stack .badge:not(:first-child){
-  margin-left: -0.75em;
-}
-
 .card {
   overflow: visible;
   border-radius: .7rem;
   box-shadow: 0 3px 10px 5px rgba(30, 93, 255, 0.04);
   border: solid #D4D3D9 .5px;
+}
+
+.card.is-fullwidth {
+  width: 100%;
 }
 
 .card-content {
@@ -382,12 +390,12 @@ table.api + table.api {
   table {
     display: table;
     table-layout: fixed;
+    width: 100%;
   }
 
   td,th {
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
   }
 }
 
@@ -403,5 +411,75 @@ table.api + table.api {
   }
   th:nth-child(4) {
     width: 10em;
+  }
+}
+
+.table-lbs-xtime {
+  th:nth-child(1) {
+    width: 1em;
+  }
+  th:nth-child(2) {
+    width: 6em;
+  }
+}
+
+.table-api {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.table-api-item {
+  th:nth-child(1) {
+    width: 1em;
+  }
+  th:nth-child(2) {
+    width: 6em;
+  }
+}
+
+.table-api tbody {
+  display: table;
+  width: 100%;
+}
+
+.table-rights {
+  display: block;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.table-rights tbody {
+  display: table;
+  width: 100%;
+}
+
+.table-devices {
+  th:nth-child(1) {
+    width: 1em;
+  }
+  th:nth-child(2) {
+    width: 6em;
+  }
+}
+
+.table-auth-key {
+  th:nth-child(1) {
+    width: 10em;
+  }
+  th:nth-child(2) {
+    width: 6em;
+  }
+}
+
+.table-tts-components {
+  th:nth-child(1) {
+    width: 20em;
+  }
+  th:nth-child(2) {
+    width: 6em;
+  }
+  td{
+    white-space: pre-wrap;
   }
 }

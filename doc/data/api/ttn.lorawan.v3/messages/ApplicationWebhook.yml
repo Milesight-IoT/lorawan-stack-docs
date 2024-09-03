@@ -24,10 +24,16 @@ fields:
   default: ""
 - name: headers
   comment: HTTP headers to use.
+  rules:
+    max_pairs: 50
   map_key:
     type: string
+    rules:
+      max_len: 64
   map_value:
     type: string
+    rules:
+      max_len: 4096
   default: {}
 - name: format
   comment: |-
@@ -59,6 +65,10 @@ fields:
     max_len: 128
   default: ""
 - name: uplink_message
+  message:
+    name: ApplicationWebhook.Message
+  default: {}
+- name: uplink_normalized
   message:
     name: ApplicationWebhook.Message
   default: {}
@@ -97,4 +107,17 @@ fields:
 - name: service_data
   message:
     name: ApplicationWebhook.Message
+  default: {}
+- name: health_status
+  message:
+    name: ApplicationWebhookHealth
+  default: {}
+- name: field_mask
+  message:
+    package: google.protobuf
+    name: FieldMask
+  default: {}
+- name: queue
+  message:
+    name: ApplicationWebhookQueue
   default: {}

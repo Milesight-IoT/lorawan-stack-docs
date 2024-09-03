@@ -15,7 +15,7 @@ Learn how to deploy the Azure IoT Hub integration for {{% tts %}}.
 
 ## Create API Key
 
-Go to your application in {{% tts %}} Console, navigate to **Integrations &#8594; Azure IoT Hub** on the left hand menu and click **Generate API Key**.
+Go to your application in {{% tts %}} Console, navigate to **Integrations &#8594; Azure IoT** on the left hand menu and click on **Expand** next to **Azure IoT Hub**. Now click on **Generate API Key**.
 
 {{< figure src="../create-api-key.png" alt="Create API key" >}}
 
@@ -25,7 +25,9 @@ Leave the integration page open, as you will need to copy in your **Azure IoT Hu
 
 ## Deploy Azure Resource Manager Template
 
-<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fttsiothubintegration.blob.core.windows.net%2Fintegration-releases%2Flatest%2Fmain.json" target="_blank" class="button is-primary">Deploy template</a>
+<div style="margin: 30px 0">
+<a href="https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fttsiothubintegration.blob.core.windows.net%2Fintegration-releases%2Flatest%2Fmain.json" target="_blank" class="ttui-btn ttui-btn--primary"       style="color: white;">Deploy template</a>
+</div>
 
 View template as [JSON](https://ttsiothubintegration.blob.core.windows.net/integration-releases/latest/main.json) or [Bicep](https://ttsiothubintegration.blob.core.windows.net/integration-releases/latest/main.bicep)
 
@@ -35,8 +37,8 @@ The following parameters configure the integration:
 
 - **Location**: The region in which the Azure resources will be deployed. Defaults to the region used by the selected Resource Group.
 - **Name Suffix**: The suffix added to the Azure Resources. Defaults to a random string.
-- **Stack Cluster Address**: The address of your {{% tts %}} deployment. Can be retrieved from the **Azure IoT Hub** integration page in {{% tts %}} (see image above).
-- **Stack Application ID**: The application ID of your application. Can be retrieved from the **Azure IoT Hub** integration page in {{% tts %}} (see image above).
+- **Stack Cluster Address**: The address of your {{% tts %}} deployment. Can be retrieved from the **Azure IoT** integration page in {{% tts %}} (see image above).
+- **Stack Application ID**: The application ID of your application. Can be retrieved from the **Azure IoT** integration page in {{% tts %}} (see image above).
 - **Stack API Key**: The application API key that you generated in the previous step.
 - **Enable fallback route**: Defines if the Azure IoT Hub fallback route should be added. If enabled, uplink messages will be submitted to the default `events` endpoint in your Azure IoT Hub.
 

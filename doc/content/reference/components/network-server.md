@@ -4,13 +4,13 @@ description: ""
 aliases: [/components/network-server]
 ---
 
-The Network Server handles the LoRaWAN network layer, including MAC commands, regional parameters and adaptive data rate (ADR).
+The Network Server handles the LoRaWAN® network layer, including MAC commands, regional parameters and adaptive data rate (ADR).
 
 <!--more-->
 
 ## Device Management
 
-Network Servers expose [NsEndDeviceRegistry]({{< ref "/reference/api/end_device#the-nsenddeviceregistry-service" >}}) service for end device management. Typical clients of this service are [Console]({{< relref "console.md" >}}) and [CLI]({{< relref "cli.md" >}}).
+Network Servers expose [NsEndDeviceRegistry]({{< ref "/api/reference/grpc/end_device#the-nsenddeviceregistry-service" >}}) service for end device management. Typical clients of this service are [Console]({{< relref "console.md" >}}) and [CLI]({{< relref "cli.md" >}}).
 
 Network Servers store device MAC configuration, MAC state and network session keys.
 
@@ -18,7 +18,7 @@ Change of device MAC configuration may trigger a downlink message.
 
 ## Application Downlink Queue Management and Linking
 
-Network Servers let [Application Servers]({{< relref "gateway-server.md" >}}) push, replace and list application downlinks as well as link applications via gRPC API.
+Network Servers let [Application Servers]({{< relref "application-server.md" >}}) push, replace and list application downlinks as well as link applications via gRPC API.
 
 Change of application downlink queue may trigger a downlink message.
 

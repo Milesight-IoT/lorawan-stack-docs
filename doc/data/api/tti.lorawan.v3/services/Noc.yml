@@ -1,0 +1,354 @@
+name: Noc
+comment: The Noc service provides historical aggregated insight of gateways, applications
+  and end devices.
+methods:
+  QueryGatewaysConnected:
+    name: QueryGatewaysConnected
+    input:
+      name: TimeBucketQuery
+    output:
+      name: ConnectedTimeBuckets
+    http:
+    - method: POST
+      path: /noc/gateways/connected
+  QueryGatewaysConnectivityTimes:
+    name: QueryGatewaysConnectivityTimes
+    input:
+      name: TimeWindowQuery
+    output:
+      name: GatewaysConnectivityTimes
+    http:
+    - method: POST
+      path: /noc/gateways/connectivity
+  QueryGatewaysActiveMetrics:
+    name: QueryGatewaysActiveMetrics
+    input:
+      name: TimeWindowQuery
+    output:
+      name: GatewaysActiveMetrics
+    http:
+    - method: POST
+      path: /noc/gateways/active-metrics
+  QueryGatewayConnectionEvents:
+    name: QueryGatewayConnectionEvents
+    input:
+      name: GatewayConnectionEventsQuery
+    output:
+      name: GatewayConnectionEvents
+    http:
+    - method: POST
+      path: /noc/gateway/{gateway_time_window.gateway_ids.gateway_id}/connection-events
+  QueryGatewayRTTStatistics:
+    name: QueryGatewayRTTStatistics
+    input:
+      name: GatewayRTTStatisticsBucketQuery
+    output:
+      name: GatewayRTTStatistics
+    http:
+    - method: POST
+      path: /noc/gateway/{gateway_ids.gateway_id}/rtt
+  QueryGatewayChannelsUtilization:
+    name: QueryGatewayChannelsUtilization
+    input:
+      name: GatewayTimeBucketQuery
+    output:
+      name: ChannelsUtilization
+    http:
+    - method: POST
+      path: /noc/gateway/{gateway_ids.gateway_id}/channels/utilization
+  QueryGatewayChannelsLoRaPerformance:
+    name: QueryGatewayChannelsLoRaPerformance
+    input:
+      name: GatewayTimeBucketQuery
+    output:
+      name: ChannelsLoRaPerformance
+    http:
+    - method: POST
+      path: /noc/gateway/{gateway_ids.gateway_id}/channels/lora-performance
+  QueryGatewayChannelsPacketCount:
+    name: QueryGatewayChannelsPacketCount
+    input:
+      name: GatewayTimeBucketQuery
+    output:
+      name: ChannelsPacketCount
+    http:
+    - method: POST
+      path: /noc/gateway/{gateway_ids.gateway_id}/channels/packet-count
+  QueryGatewayDataRatesPacketCount:
+    name: QueryGatewayDataRatesPacketCount
+    input:
+      name: GatewayTimeBucketQuery
+    output:
+      name: DataRatesPacketCount
+    http:
+    - method: POST
+      path: /noc/gateway/{gateway_ids.gateway_id}/data_rates/packet-count
+  QueryGatewayTrafficRates:
+    name: QueryGatewayTrafficRates
+    input:
+      name: GatewayTimeBucketQuery
+    output:
+      name: TrafficRatesTimeBuckets
+    http:
+    - method: POST
+      path: /noc/gateway/{gateway_ids.gateway_id}/traffic
+  QueryGatewayUptime:
+    name: QueryGatewayUptime
+    input:
+      name: GatewayTimeWindowQuery
+    output:
+      package: google.protobuf
+      name: FloatValue
+    http:
+    - method: POST
+      path: /noc/gateway/{gateway_ids.gateway_id}/uptime
+  QueryGatewayTopNetworksSeen:
+    name: QueryGatewayTopNetworksSeen
+    input:
+      name: GatewayTopNetworksSeenQuery
+    output:
+      name: GatewayTopNetworksSeen
+    http:
+    - method: POST
+      path: /noc/gateway/{gateway_time_window.gateway_ids.gateway_id}/networks-seen/top/{top}
+  QueryApplicationsActiveMetrics:
+    name: QueryApplicationsActiveMetrics
+    input:
+      name: TimeWindowQuery
+    output:
+      name: ApplicationsActiveMetrics
+    http:
+    - method: POST
+      path: /noc/applications/active-metrics
+  QueryApplicationsActive:
+    name: QueryApplicationsActive
+    input:
+      name: TimeBucketQuery
+    output:
+      name: ConnectedTimeBuckets
+    http:
+    - method: POST
+      path: /noc/applications/active
+  QueryApplicationsStatistics:
+    name: QueryApplicationsStatistics
+    input:
+      name: TimeWindowQuery
+    output:
+      name: ApplicationsStatistics
+    http:
+    - method: POST
+      path: /noc/applications/statistics
+  QueryApplicationStatistics:
+    name: QueryApplicationStatistics
+    input:
+      name: ApplicationTimeWindowQuery
+    output:
+      name: ApplicationEndDeviceStatistics
+    http:
+    - method: POST
+      path: /noc/application/{application_ids.application_id}/statistics
+  QueryApplicationEndDevicesActiveMetrics:
+    name: QueryApplicationEndDevicesActiveMetrics
+    input:
+      name: ApplicationTimeWindowQuery
+    output:
+      name: EndDevicesActiveMetrics
+    http:
+    - method: POST
+      path: /noc/application/{application_ids.application_id}/end_devices/active-metrics
+  QueryApplicationGatewaysSeen:
+    name: QueryApplicationGatewaysSeen
+    input:
+      name: ApplicationTimeWindowQuery
+    output:
+      name: ApplicationGatewaysSeen
+    http:
+    - method: POST
+      path: /noc/application/{application_ids.application_id}/gateways
+  QueryApplicationChannelsPacketCount:
+    name: QueryApplicationChannelsPacketCount
+    input:
+      name: ApplicationTimeBucketQuery
+    output:
+      name: ChannelsPacketCount
+    http:
+    - method: POST
+      path: /noc/application/{application_ids.application_id}/channels/packet-count
+  QueryApplicationChannelsUtilization:
+    name: QueryApplicationChannelsUtilization
+    input:
+      name: ApplicationTimeBucketQuery
+    output:
+      name: ChannelsUtilization
+    http:
+    - method: POST
+      path: /noc/application/{application_ids.application_id}/channels/utilization
+  QueryApplicationChannelsLoRaPerformance:
+    name: QueryApplicationChannelsLoRaPerformance
+    input:
+      name: ApplicationTimeBucketQuery
+    output:
+      name: ChannelsLoRaPerformance
+    http:
+    - method: POST
+      path: /noc/application/{application_ids.application_id}/channels/lora-performance
+  QueryApplicationDataRatesPacketCount:
+    name: QueryApplicationDataRatesPacketCount
+    input:
+      name: ApplicationTimeBucketQuery
+    output:
+      name: DataRatesPacketCount
+    http:
+    - method: POST
+      path: /noc/application/{application_ids.application_id}/data_rates/packet-count
+  QueryApplicationEventForwardCount:
+    name: QueryApplicationEventForwardCount
+    input:
+      name: ApplicationTimeBucketQuery
+    output:
+      name: ApplicationEventsForwardCount
+    http:
+    - method: POST
+      path: /noc/application/{application_ids.application_id}/events/forward
+  QueryApplicationWebhookFailure:
+    name: QueryApplicationWebhookFailure
+    input:
+      name: ApplicationTimeBucketQuery
+    output:
+      name: ApplicationWebhookFailuresCount
+    http:
+    - method: POST
+      path: /noc/application/{application_ids.application_id}/events/webhook/failure
+  QueryApplicationWebhookFailureTopFive:
+    name: QueryApplicationWebhookFailureTopFive
+    input:
+      name: ApplicationTimeBucketQuery
+    output:
+      name: ApplicationWebhookFailuresByStatusCodeCount
+    http:
+    - method: POST
+      path: /noc/application/{application_ids.application_id}/events/webhook/failure/top-five
+  QueryApplicationWebhookFailureToForwardRatio:
+    name: QueryApplicationWebhookFailureToForwardRatio
+    input:
+      name: ApplicationTimeWindowQuery
+    output:
+      name: ApplicationWebhookFailureToForwardRatio
+    http:
+    - method: POST
+      path: /noc/application/{application_ids.application_id}/events/webhook/failure/ratio
+  QueryEndDevicesActive:
+    name: QueryEndDevicesActive
+    input:
+      name: TimeBucketQuery
+    output:
+      name: ConnectedTimeBuckets
+    http:
+    - method: POST
+      path: /noc/end_devices/active
+  QueryEndDevicesActiveMetrics:
+    name: QueryEndDevicesActiveMetrics
+    input:
+      name: TimeWindowQuery
+    output:
+      name: EndDevicesActiveMetrics
+    http:
+    - method: POST
+      path: /noc/end_devices/active-metrics
+  QueryEndDevicesStatistics:
+    name: QueryEndDevicesStatistics
+    input:
+      name: TimeWindowQuery
+    output:
+      name: EndDevicesStatistics
+    http:
+    - method: POST
+      path: /noc/end_devices/statistics
+  QueryEndDeviceChannelsPacketCount:
+    name: QueryEndDeviceChannelsPacketCount
+    input:
+      name: EndDeviceTimeBucketQuery
+    output:
+      name: ChannelsPacketCount
+    http:
+    - method: POST
+      path: /noc/end_device/{end_device_ids.application_ids.application_id}/{end_device_ids.device_id}/channels/packet-count
+  QueryEndDeviceChannelsUtilization:
+    name: QueryEndDeviceChannelsUtilization
+    input:
+      name: EndDeviceTimeBucketQuery
+    output:
+      name: ChannelsUtilization
+    http:
+    - method: POST
+      path: /noc/end_device/{end_device_ids.application_ids.application_id}/{end_device_ids.device_id}/channels/utilization
+  QueryEndDeviceChannelsLoRaPerformance:
+    name: QueryEndDeviceChannelsLoRaPerformance
+    input:
+      name: EndDeviceTimeBucketQuery
+    output:
+      name: ChannelsLoRaPerformance
+    http:
+    - method: POST
+      path: /noc/end_device/{end_device_ids.application_ids.application_id}/{end_device_ids.device_id}/channels/lora-performance
+  QueryEndDeviceDataRatesPacketCount:
+    name: QueryEndDeviceDataRatesPacketCount
+    input:
+      name: EndDeviceTimeBucketQuery
+    output:
+      name: DataRatesPacketCount
+    http:
+    - method: POST
+      path: /noc/end_device/{end_device_ids.application_ids.application_id}/{end_device_ids.device_id}/data_rates/packet-count
+  QueryEndDevicePacketErrorRate:
+    name: QueryEndDevicePacketErrorRate
+    input:
+      name: EndDeviceTimeBucketQuery
+    output:
+      name: PacketErrorRatesTimeBuckets
+    http:
+    - method: POST
+      path: /noc/end_device/{end_device_ids.application_ids.application_id}/{end_device_ids.device_id}/packet-error-rate
+  QueryEndDeviceSessionStart:
+    name: QueryEndDeviceSessionStart
+    input:
+      name: EndDeviceTimeBucketQuery
+    output:
+      package: google.protobuf
+      name: Timestamp
+    http:
+    - method: POST
+      path: /noc/end_device/{end_device_ids.application_ids.application_id}/{end_device_ids.device_id}/session-start
+  QueryEndDeviceLastSeen:
+    name: QueryEndDeviceLastSeen
+    input:
+      name: EndDeviceTimeBucketQuery
+    output:
+      package: google.protobuf
+      name: Timestamp
+    http:
+    - method: POST
+      path: /noc/end_device/{end_device_ids.application_ids.application_id}/{end_device_ids.device_id}/last-seen
+  CheckHealth:
+    name: CheckHealth
+    input:
+      package: google.protobuf
+      name: Empty
+    output:
+      package: google.protobuf
+      name: Empty
+    http:
+    - method: GET
+      path: /noc/health
+  GetConfiguration:
+    name: GetConfiguration
+    comment: |-
+      Get the configuration of the Network Operations Center. The response is typically used
+      to enable or disable features in a user interface.
+    input:
+      name: GetNocConfigurationRequest
+    output:
+      name: GetNocConfigurationResponse
+    http:
+    - method: GET
+      path: /noc/configuration

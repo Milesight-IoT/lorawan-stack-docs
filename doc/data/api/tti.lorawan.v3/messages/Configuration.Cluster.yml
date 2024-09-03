@@ -9,12 +9,31 @@ fields:
   message:
     name: Configuration.Cluster.IdentityServer
   default: {}
+- name: gs
+  comment: Gateway Server configuration.
+  message:
+    name: Configuration.Cluster.GatewayServer
+  default: {}
 - name: ns
   message:
     name: Configuration.Cluster.NetworkServer
   default: {}
+- name: as
+  message:
+    name: Configuration.Cluster.ApplicationServer
+  default: {}
 - name: js
-  comment: JoinServer
+  comment: Join Server configuration.
   message:
     name: Configuration.Cluster.JoinServer
+  default: {}
+- name: noc
+  comment: Network Operations Center configuration.
+  message:
+    name: Configuration.Cluster.NetworkOperationsCenter
+  default: {}
+- name: ars
+  comment: Alert Routing Server configuration.
+  message:
+    name: Configuration.Cluster.AlertRoutingServer
   default: {}

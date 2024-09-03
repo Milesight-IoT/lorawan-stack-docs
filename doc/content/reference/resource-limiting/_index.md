@@ -15,7 +15,7 @@ The resource limiting configuration is split into multiple profiles. For each pr
 
 Enable resource limiting by adding the following configuration to your `ttn-lw-stack.yml`.
 
-{{< note >}} The values shown below are only meant as an example. Make sure to adjust them accordingly, depending on the actual traffic of your deployment. {{</ note >}}
+Resource limiting can be applied per application, as well as for all applications in a tenant. The values shown below are only meant as an example. Make sure to adjust them accordingly, depending on the actual traffic of your deployment.
 
 ```yaml
 resource-limiting:
@@ -39,7 +39,7 @@ resource-limiting:
 
 {{< resource-limiting >}}
 
-{{< note >}} For resources where multiple classes are defined, the first matching profile will be used. For example, if profile `A` is associated with class `as:conn` and profile `B` is associated with `as:conn:app:my-application@my-tenant`, then connections for `my-application@my-tenant` will use the limits from profile `B`. {{< /note >}}
+For resources where multiple classes are defined, the first matching profile will be used. For example, if profile `A` is associated with class `as:conn` and profile `B` is associated with `as:conn:app:my-application@my-tenant`, then connections for `my-application@my-tenant` will use the limits from profile `B`.
 
 ## Resource Limiting Actions
 
@@ -49,6 +49,8 @@ The following table describes how {{% tts %}} reacts when the maximum resource l
 | ---------------------------- | ----------------------------------------------------------------------------- | ----------------------------------------- |
 | gRPC Application Connections | Calls to `Subscribe` RPC will fail with an error of type `ResourceExhausted`. | Terminate existing connections and retry. |
 | MQTT Application Connections | A `ServerUnavailable` response is returned for new connections.               | Terminate existing connections and retry. |
+
+For example, if an MQTT connection is failing due to resource limits exceeding, you will see an error such as `Resource limit 16 exceeded for resource with key as:conn:frontend:mqtt:app:test-app-1@test-tenant-1`. The resolution would be to terminate existing connections and retry.
 
 ## External configuration
 

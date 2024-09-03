@@ -32,9 +32,13 @@ You can now click on the **Generate new API key** button in order to generate an
 
 {{< figure src="mqtt-key-created.png" alt="MQTT API key created" >}}
 
-{{< note >}} Make sure to copy your API key now, since it will no longer be visible after leaving the page for security reasons. {{</ note >}}
+{{< note >}} 
+Make sure to copy your API key now, since it will no longer be visible after leaving the page for security reasons.
 
-{{< note >}} Keep in mind that this example shows the MQTT Server information for {{% tts %}} Open Source. If you are using a different deployment, make sure your read a [Note on Using the tenant ID]({{< ref "/integrations/mqtt#note-on-using-the-tenant-id" >}}). {{</ note >}}
+If API key does not exist or has been removed, you will probably see the `as.mqtt.connect.fail` event with the `api key with id {api_key_id} not found` error in application Live events.
+{{</ note >}}
+
+Keep in mind that this example shows the MQTT Server information for {{% tts %}} Open Source. If you are using a different deployment, make sure your read a [Note on Using the tenant ID]({{< ref "/integrations/mqtt#note-on-using-the-tenant-id" >}}).
 
 The information shown on the image above is enough for you to be able to connect to {{% tts %}} MQTT Server using an arbitrary MQTT client. Keep reading to find out how.
 
@@ -44,7 +48,7 @@ There are many available MQTT clients you can use to connect to {{% tts %}} MQTT
 
 In this section, we focus on the available topics that the MQTT Server is exposing and provide short examples of their usage. In general, some topics are used for subscribing to upstream traffic, while others are used for publishing downlink traffic. 
 
-{{< note >}} In the examples below, we use the `mosquitto_pub` and `mosquitto_sub` clients. {{</ note >}}
+In the examples below, we use the `mosquitto_pub` and `mosquitto_sub` clients.
 
 ## Subscribing to Upstream Traffic
 
@@ -60,7 +64,7 @@ The Application Server publishes uplink traffic on the following topics:
 - `v3/{application id}@{tenant id}/devices/{device id}/service/data`
 - `v3/{application id}@{tenant id}/devices/{device id}/location/solved`
 
-{{< note >}} Remember that the format of these topics for {{% tts %}} Open Source would contain `{application id}` instead of `{application id}@{tenant id}`. {{</ note >}}
+Remember that the format of these topics for {{% tts %}} Open Source would contain `{application id}` instead of `{application id}@{tenant id}`.
 
 While you could subscribe to all of these topics separately, for the simplicity of this tutorial we use `#` to subscribe to all topics, i.e. to receive all uplink traffic.
 
@@ -69,12 +73,12 @@ Subscribing to all topics with the `mosquitto_sub` client can be done with:
 ```bash
 # Tip: when using `mosquitto_sub`, pass the `-d` flag to see the topics messages get published on.
 # For example:
-$ mosquitto_sub -h thethings.example.com -t "#" -u "app1@tenant1" -P "NNSXS.VEEBURF3KR77ZR.." -d
+mosquitto_sub -h thethings.example.com -t "#" -u "app1@tenant1" -P "NNSXS.VEEBURF3KR77ZR.." -d
 ```
 
 ### Example 
 
-{{< note >}} This example is suitable for {{% tts %}} deployments other than Open Source. If you are using {{% tts %}} Open source, make sure your read a [Note on Using the tenant ID]({{< ref "/integrations/mqtt#note-on-using-the-tenant-id" >}}). {{</ note >}} 
+This example is suitable for {{% tts %}} deployments other than Open Source. If you are using {{% tts %}} Open source, make sure your read a [Note on Using the tenant ID]({{< ref "/integrations/mqtt#note-on-using-the-tenant-id" >}}).
 
 When a device `dev1` (in application `app1` in tenant `tenant1`) joins the network, the `join` message is published on the topic `v3/app1@tenant1/devices/dev1/join`. With your MQTT client subscribed to that topic (or all topics), you can catch that `join` message.
 
@@ -149,7 +153,6 @@ When a device `dev1` sends an uplink message, that message is being published on
           "spreading_factor": 7
         }
       },
-      "data_rate_index": 5,
       "coding_rate": "4/6",
       "frequency": "868500000",
       "gateway_channel_index": 2,
@@ -164,13 +167,13 @@ When a device `dev1` sends an uplink message, that message is being published on
 
 Downlinks can be scheduled by publishing the message to the topic `v3/{application id}@{tenant id}/devices/{device id}/down/push`. 
 
-{{< note >}} Remember that the format of this topic for {{% tts %}} Open Source deployment would be `v3/{application id}/devices/{device id}/down/push`. {{</ note >}}
+Remember that the format of this topic for {{% tts %}} Open Source deployment would be `v3/{application id}/devices/{device id}/down/push`.
 
 Instead of `/push`, you can also use `/replace` to replace the downlink queue. Replacing with an empty array clears the downlink queue.
 
 ### Example
 
-{{< note >}} This example is suitable for {{% tts %}} deployments other than Open Source. If you are using {{% tts %}} Open source, make sure your read a [Note on Using the tenant ID]({{< ref "/integrations/mqtt#note-on-using-the-tenant-id" >}}). {{</ note >}} 
+This example is suitable for {{% tts %}} deployments other than Open Source. If you are using {{% tts %}} Open source, make sure your read a [Note on Using the tenant ID]({{< ref "/integrations/mqtt#note-on-using-the-tenant-id" >}}).
 
 To send an unconfirmed downlink message to the device `dev1` in application `app1` in tenant `tenant1` with the hexadecimal payload `BE EF` on `FPort` 15 with normal priority, use the topic `v3/app1@tenant1/devices/dev1/down/push` with the following contents:
 
@@ -186,11 +189,11 @@ To send an unconfirmed downlink message to the device `dev1` in application `app
 
 {{< note >}} For scheduling downlink messages, the `f_port` values from `1` to `233` are allowed. {{</ note >}}
 
-> Use [this handy tool](https://v2.cryptii.com/hexadecimal/base64) to convert hexadecimal to base64.
+Use [this handy tool](https://v2.cryptii.com/hexadecimal/base64) to convert hexadecimal to base64.
 
 ```bash
 # If you use `mosquitto_pub`, use the following command:
-$ mosquitto_pub -h thethings.example.com \
+mosquitto_pub -h thethings.example.com \
   -t "v3/app1@tenant1/devices/dev1/down/push" \
   -u "app1@tenant1" -P "NNSXS.VEEBURF3KR77ZR.." \
   -m '{"downlinks":[{"f_port": 15,"frm_payload":"vu8=","priority": "NORMAL"}]}' \
@@ -199,7 +202,7 @@ $ mosquitto_pub -h thethings.example.com \
 
 It is also possible to send multiple downlink messages on a single push because `downlinks` is an array. 
 
-{{< note >}} If you do not specify a priority, the default priority `LOWEST` is used. You can specify `LOWEST`, `LOW`, `BELOW_NORMAL`, `NORMAL`, `ABOVE_NORMAL`, `HIGH` and `HIGHEST`. {{</ note >}}
+If you do not specify a priority, the default priority `LOWEST` is used. You can specify `LOWEST`, `LOW`, `BELOW_NORMAL`, `NORMAL`, `ABOVE_NORMAL`, `HIGH` and `HIGHEST`.
 
 {{% tts %}} supports some cool features, such as confirmed downlink with your own correlation IDs. For example, you can push this:
 

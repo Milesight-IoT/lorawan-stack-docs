@@ -7,18 +7,23 @@ This reference explains how {{% tts %}} deals with IDs and EUIs, including regul
 
 <!--more-->
 
-## Requirements of an ID or EUI
+## Requirements of an ID
 
-An ID or EUI in {{% tts %}} must:
+An ID in {{% tts %}} must:
 
 - Have a length of between 3 and 36 characters (inclusive)
-  - Exception: User IDs can have a length between 2 and 36 characters (inclusive) {{< new-in-version "3.13" >}}
+  - Exception: User IDs can have a length between 2 and 36 characters (inclusive)
 - Consist of lowercase letters, numbers, and non-consecutive dashes
 - **NOT** begin or end with a dash
 
-The following regular expression is used to validate IDs and EUIs (with the exception of the User ID):
+The following regular expression is used to validate IDs (with the exception of the User ID):
 
 `(^[a-z0-9](?:[-]?[a-z0-9]){2,}$)`
+
+## Requirements of an EUI
+
+An EUI (Extended Unique Identifier) is a 64-bit unique identifier as defined by [IEEE](https://standards.ieee.org/wp-content/uploads/import/documents/tutorials/eui.pdf). When you purchase a device or a gateway, the manufacturer already assigns an EUI to it. EUIs must be registered with IEEE and it is not permitted to use an EUI that's owned by someone else.
+For testing, you can generate a random one in accordance with the test ranges defined by the [IEEE 802 standards](https://ieee802.org/).
 
 ## Uniqueness
 
@@ -49,3 +54,5 @@ EUIs of gateways and end device are released when deleted.
 - When an application is deleted, the ID is retained and cannot be reused within the tenant
 - When a gateway is deleted, the ID is retained but the gateway EUI can be reused
 - When an end device is deleted, the ID and EUI are released and can be reused
+
+{{< note >}} Entity IDs that were purged from an admin account are released and can be reused. Also, keep in mind that {{% tts %}} allows you to restore deleted entities within 24 hours from the time when they were deleted. {{</ note >}}

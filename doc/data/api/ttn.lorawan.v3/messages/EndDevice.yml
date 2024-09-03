@@ -205,6 +205,9 @@ fields:
 - name: net_id
   comment: Home NetID. Stored in Join Server.
   type: bytes
+  rules:
+    len: 3
+    ignore_empty: true
   default: ""
 - name: mac_settings
   comment: Settings for how the Network Server handles MAC layer for this device.
@@ -338,8 +341,11 @@ fields:
   type: bool
   default: false
 - name: claim_authentication_code
-  comment: Authentication code to claim ownership of the end device. Stored in Join
-    Server.
+  comment: |-
+    Authentication code to claim ownership of the end device.
+    From TTS v3.21.0 this field is stored in the Identity Server.
+    For TTS versions < 3.21.0, this field is stored in the Join Server.
+    The value stored on the Identity Server takes precedence.
   message:
     name: EndDeviceAuthenticationCode
   default: {}
@@ -369,3 +375,22 @@ fields:
     package: google.protobuf
     name: Timestamp
   default: "0001-01-01T00:00:00Z"
+- name: last_seen_at
+  comment: |-
+    Timestamp when a device uplink has been last observed.
+    This field is set by the Application Server and stored in the Identity Server.
+  message:
+    package: google.protobuf
+    name: Timestamp
+  default: "0001-01-01T00:00:00Z"
+- name: serial_number
+  type: string
+  rules:
+    max_len: 36
+    pattern: ^[a-z0-9](?:[-]?[a-z0-9]){2,}$
+    ignore_empty: true
+  default: ""
+- name: lora_alliance_profile_ids
+  message:
+    name: LoRaAllianceProfileIdentifiers
+  default: {}

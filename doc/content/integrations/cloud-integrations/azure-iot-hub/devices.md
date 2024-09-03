@@ -20,7 +20,7 @@ Devices are created automatically as they join the network or send an uplink mes
 
 You can use Azure IoT Hub to create and claim devices in {{% tts %}}. This is useful to manage all your devices in one place, without having to use {{% tts %}} Console, CLI or API.
 
-**Creating** a device allows you to add any LoRaWAN device by manually entering its information and security keys.
+**Creating** a device allows you to add any LoRaWAN® device by manually entering its information and security keys.
 
 In the Azure Console, open your Azure IoT Hub resource. In the menu on the left, click **IoT Devices**.
 
@@ -66,7 +66,7 @@ The final JSON `tags` object should look as follows:
 {
    "lorawan":{
       "devEui":"0004A30B001C5838",
-      "joinEui":"0000000000000000",
+      "joinEui":"800000000000000C",
       "lorawanVersion":"1.0.2",
       "regionalParametersVersion":"1.0.2-b",
       "frequencyPlanId":"EU_863_870_TTN",

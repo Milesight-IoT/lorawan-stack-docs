@@ -1,0 +1,48 @@
+name: AlertNotification
+fields:
+- name: type
+  comment: The type of alert generated.
+  enum:
+    name: AlertType
+  rules:
+    defined_only: true
+  default: ALERT_UNKNOWN
+- name: status
+  comment: The current status of the alert notification, either "firing" or "resolved".
+  enum:
+    name: AlertStatus
+  rules:
+    defined_only: true
+  default: FIRING
+- name: entity_ids
+  comment: Identifiers of the entity that triggered the alert.
+  message:
+    package: ttn.lorawan.v3
+    name: EntityIdentifiers
+  default: {}
+- name: tenant_ids
+  comment: Identifiers of the tenant that triggered the alert.
+  message:
+    name: TenantIdentifiers
+  rules:
+    required: true
+  default: {}
+- name: receiver_ids
+  comment: Identifiers of the alert's receiver.
+  message:
+    name: AlertNotificationReceiverIdentifiers
+  rules:
+    required: true
+  default: {}
+- name: started_at
+  comment: The time the alert was triggered.
+  message:
+    package: google.protobuf
+    name: Timestamp
+  default: "0001-01-01T00:00:00Z"
+- name: ended_at
+  comment: The time the alert was resolved.
+  message:
+    package: google.protobuf
+    name: Timestamp
+  default: "0001-01-01T00:00:00Z"

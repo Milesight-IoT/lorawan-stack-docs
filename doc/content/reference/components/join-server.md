@@ -4,7 +4,7 @@ description: ""
 aliases: [/components/join-server]
 ---
 
-The Join Server handles the LoRaWAN join flow, including Network and Application Server authentication and session key generation.
+The Join Server handles the LoRaWAN® join flow, including Network and Application Server authentication and session key generation.
 
 <!--more-->
 
@@ -16,7 +16,7 @@ In case a join-request is accepted, the Join Server derives session security con
 
 ## Device Management
 
-Join Servers expose [JsEndDeviceRegistry]({{< ref "/reference/api/end_device#the-jsenddeviceregistry-service" >}}) service for end device management. Typical clients of this service are [Console]({{< ref "/reference/components/console.md" >}}) and [CLI]({{< ref "/reference/components/cli.md" >}}).
+Join Servers expose [JsEndDeviceRegistry]({{< ref "/api/reference/grpc/end_device#the-jsenddeviceregistry-service" >}}) service for end device management. Typical clients of this service are [Console]({{< ref "/reference/components/console.md" >}}) and [CLI]({{< ref "/reference/components/cli.md" >}}).
 
 Join Servers store device root and session keys.
 

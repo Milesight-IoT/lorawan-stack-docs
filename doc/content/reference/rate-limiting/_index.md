@@ -1,12 +1,13 @@
 ---
 title: "Rate Limiting"
 description: ""
-new_in_version: "3.12"
 ---
 
 {{% tts %}} supports rate limiting for all outward facing services. Access to each resource is limited by a unique identifier key, and it is possible to define rate limiting classes for fine-grained control.
 
 <!--more-->
+
+For more details about the algorithm used, read [here](https://en.wikipedia.org/wiki/Generic_cell_rate_algorithm).
 
 ## Example configuration
 
@@ -14,7 +15,7 @@ The rate limiting configuration is split into multiple profiles. For each profil
 
 Enable rate limiting by adding the following configuration to your `ttn-lw-stack.yml`.
 
-{{< note >}} The values shown below are only meant as an example. Make sure to adjust them accordingly, depending on the actual traffic of your deployment. {{</ note >}}
+The values shown below are only meant as an example. Make sure to adjust them accordingly, depending on the actual traffic of your deployment.
 
 ```yaml
 rate-limiting:
@@ -23,6 +24,14 @@ rate-limiting:
       max-per-min: 30
       associations:
         - http
+    - name: User login
+      max-per-min: 10
+      associations:
+        - http:account
+    - name: Create new users
+      max-per-min: 10
+      associations:
+        - grpc:method:/ttn.lorawan.v3.UserRegistry/Create
     - name: Application downlink traffic
       max-per-min: 10
       associations:
@@ -34,7 +43,7 @@ rate-limiting:
       max-per-min: 5
       associations:
         - gs:accept:mqtt
-        - gs:accept:ws
+        - gs:accept:semtechws/lbslns
         - grpc:stream:accept:/ttn.lorawan.v3.GtwGs/LinkGateway
     - name: gRPC API
       max-per-min: 60
@@ -58,7 +67,7 @@ This section lists resources of {{% tts %}} on which a maximum rate limit can be
 
 {{< rate-limiting >}}
 
-{{< note >}} gRPC Requests support multiple classes. This is to enable overriding the generic rate limits for specific gRPC methods. {{</ note >}}
+{{< note >}} Both gRPC methods and HTTP endpoints support multiple classes. This enables overriding the generic rate limits for specific methods and endpoints. {{</ note >}}
 
 {{< warning >}} When {{% tts %}} HTTP and gRPC endpoints are served behind a reverse proxy, the `X-Forwarded-For` header is respected for the remote IP. The IP address of the reverse proxy must be trusted by {{% tts %}} for this to work, see [HTTP options]({{< ref "/reference/configuration/the-things-stack#http-options" >}}) and [gRPC Options]({{< ref "/reference/configuration/the-things-stack#grpc-options" >}}). {{</ warning >}}
 
@@ -86,42 +95,18 @@ When rate limiting is enabled, the following headers are added to all HTTP and g
 - `X-Rate-Limit-Reset`: Seconds until the rate limiter resets.
 - `X-Rate-Limit-Retry`: Seconds the client should wait before retrying the request.
 
-## Example configuration
+## Rate limiting providers
 
-Enable rate limiting by adding the following configuration to your `ttn-lw-stack.yml`. Make sure to alter the values accordingly so that they match your deployment needs.
+The default rate limiting provider for {{% tts %}} is `memory`. When using this provider the state of rate limiting is stored locally on each instance. The drawback of using it is inconsistent rate limiting state. The `redis` provider eliminates this problem by storing a shared rate limiting state for all instances.
+
+| Provider | State        |
+| -------- | ------------ |
+| `memory` | per instance |
+| `redis`  | shared       |
+
+To enable `redis` rate limiting provider you can set it in rate limiting configuration.
 
 ```yaml
 rate-limiting:
-  profiles:
-    - name: HTTP servers
-      max-per-min: 30
-      associations:
-        - http
-    - name: Application downlink traffic
-      max-per-min: 10
-      associations:
-        - as:down:web
-        - as:down:mqtt
-        - grpc:method:/ttn.v3.lorawan.v3.AppAs/DownlinkQueuePush
-        - grpc:method:/ttn.v3.lorawan.v3.AppAs/DownlinkQueueReplace
-    - name: Gateway connections
-      max-per-min: 5
-      associations:
-        - gs:accept:mqtt
-        - gs:accept:ws
-        - grpc:stream:accept:/ttn.lorawan.v3.GtwGs/LinkGateway
-    - name: gRPC API
-      max-per-min: 60
-      associations:
-        - grpc:method
-        - grpc:stream:accept
-    - name: Override rate for uplink simulation
-      max-per-min: 5
-      associations:
-        - grpc:method:/ttn.lorawan.v3.AppAs/SimulateUplink
-    - name: Gateway uplink traffic
-      max-per-min: 1000
-      max-burst: 1500
-      associations:
-        - gs:up
+  provider: `redis`
 ```

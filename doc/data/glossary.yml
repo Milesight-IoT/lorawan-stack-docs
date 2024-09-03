@@ -4,7 +4,7 @@
 
 # <Term>:
 #  description: <Description>
-#  link: <Link> or <Ref> e.g https://wikipedia.com or /reference/api
+#  link: <Link> or <Ref> e.g https://wikipedia.com or /api/others/grpc/reference
 #  abbr:
 #    - <Abbr 1>
 #    - <Abbr 2>
@@ -342,3 +342,48 @@
 
 - term: Maximum EIRP
   description: The maximum allowed Effective Isotropic Radiated Power (EIRP). The end device uses this value as the maximum, it shall never use a higher EIRP, but a lower EIRP is allowed. This value is given in dBm. Changing the desired value makes the Network Server transmit the `TxParamSetupReq`.
+
+- term: Received Signal Strength Indicator
+  description: The received signal power in milliwatts, measured in dBm. This value is used as a measurement of how well the signal is received. RSSI is used in the ADR feedback loop to determine if a signal is being received with enough power to allow the device to increase its data rate and conserve battery. A high RSSI means the device can reduce transmission power and messages will still be received.
+  abbr:
+    - RSSI
+
+- term: Effective Isotropic Radiated Power
+  description: The total power radiated from a hypothetical isotropic antenna in a single direction in watts, measured in dBm. The maximum allowed EIRP differs between regions. Antenna power provides a tradeoff between range and battery life, and is one of the components of the ADR mechanism.
+  abbr:
+    - EIRP
+
+- term: Effective Radiated Power
+  description: The total power radiated by a real antenna relative to a half-wave dipole antenna.
+  abbr:
+    - ERP
+
+- term: Hop Time
+  description: The amount of time needed to change from one frequency to another, in which the radio is not transmitting.
+
+- term: The Things Stack (TTS)
+  description: LoRaWAN Network Server sofware stack. {{% tts %}} is currently at version 3 of a Network Server implementation, and is therefore also informally known as V3.
+
+- term: The Things Stack Cloud (TTSC)
+  description: SLA backed, highly available, feature rich LoRaWAN network server hosted by The Things Industries.
+
+- term: The Things Stack AWS Launcher
+  description: AWS marketplace makes it easy to deploy in one click on new or existing EC2 cluster. Integrates effortlessly with AWS IOT, so you can keep using tools you're already familiar with.
+
+- term: The Things Stack Dedicated Cloud
+  description: All the benefits of The Things Stack Cloud on a dedicated cluster.
+
+- term: The Things Stack Enterprise (TTSE)
+  description: Install the network components on your own hardware, with professional support from The Things Industries.
+
+- term: The Things Stack Sandbox (TTSS)
+  description: Run by The Things Industries, this is a cluster for non-commercial, small scale testing and experimentation, which powers the world's largest community based LoRaWAN network.
+
+- term: The Things Stack Open Source
+  description:  For DIY'ers, the core of is The Things Stack is [open source](https://github.com/thethingsnetwork/lorawan-stack). If you want to get your hands dirty and understand how The Things Stack works, clone away and get hacking.
+
+- term: The Things Network (TTN)
+  description: TTN is [The Things Network](https://thethingsnetwork.org), which is a global collaborative Internet of Things ecosystem that creates networks, devices and solutions using LoRaWAN. The Things Network runs {{% ttss %}}, which is a crowdsourced, open and decentralized LoRaWAN network.
+
+- term: The Things Industries (TTI)
+  description: the company primarily responsible for development of {{% tts %}} and writing documentation. The Things Industries also offers cloud hosted and on-premises private LoRaWAN networks with additional enterprise features, and premium support plans for enterprise clients. If you're interested in building your own guaranteed uptime enterprise grade LoRaWAN network, send us an [email](mailto:info@thethingsindustries.com).

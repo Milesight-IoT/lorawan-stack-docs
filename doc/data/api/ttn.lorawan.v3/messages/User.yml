@@ -60,8 +60,9 @@ fields:
       max_len: 200
   default: {}
 - name: contact_info
-  comment: Contact information for this user. Typically used to indicate who to contact
-    with security/billing questions about the user.
+  comment: |-
+    Contact information for this user. Typically used to indicate who to contact with security/billing questions about the user.
+    This field is deprecated.
   rules:
     max_items: 10
   repeated:
@@ -151,4 +152,42 @@ fields:
     This information is public and can be seen by any authenticated user in the network.
   message:
     name: Picture
+  default: {}
+- name: application_limit
+  comment: |-
+    The maximum number of applications of the user.
+    This field can only be modified by admins.
+  message:
+    package: google.protobuf
+    name: UInt64Value
+  default: null
+- name: client_limit
+  comment: |-
+    The maximum number of clients of the user.
+    This field can only be modified by admins.
+  message:
+    package: google.protobuf
+    name: UInt64Value
+  default: null
+- name: gateway_limit
+  comment: |-
+    The maximum number of gateways of the user.
+    This field can only be modified by admins.
+  message:
+    package: google.protobuf
+    name: UInt64Value
+  default: null
+- name: organization_limit
+  comment: |-
+    The maximum number of organizations of the user.
+    This field can only be modified by admins.
+  message:
+    package: google.protobuf
+    name: UInt64Value
+  default: null
+- name: console_preferences
+  comment: Console preferences contains the user's preferences regarding the behavior
+    of the Console.
+  message:
+    name: UserConsolePreferences
   default: {}

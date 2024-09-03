@@ -6,6 +6,12 @@ fields:
   rules:
     required: true
   default: {}
+- name: query
+  comment: Find end devices where the ID, name, description or EUI contains this substring.
+  type: string
+  rules:
+    max_len: 50
+  default: ""
 - name: id_contains
   comment: Find end devices where the ID contains this substring.
   type: string
@@ -81,6 +87,8 @@ fields:
     - -description
     - created_at
     - -created_at
+    - last_seen_at
+    - -last_seen_at
   default: ""
 - name: limit
   comment: Limit the number of results per page.

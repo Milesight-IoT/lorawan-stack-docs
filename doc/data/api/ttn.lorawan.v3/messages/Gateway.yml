@@ -60,19 +60,26 @@ fields:
       max_len: 200
   default: {}
 - name: contact_info
-  comment: Contact information for this gateway. Typically used to indicate who to
-    contact with technical/security questions about the gateway.
+  comment: |-
+    Contact information for this gateway. Typically used to indicate who to contact with technical/security questions about the gateway.
+    This field is deprecated. Use administrative_contact and technical_contact instead.
   rules:
     max_items: 10
   repeated:
     message:
       name: ContactInfo
   default: []
+- name: administrative_contact
+  message:
+    name: OrganizationOrUserIdentifiers
+  default: {}
+- name: technical_contact
+  message:
+    name: OrganizationOrUserIdentifiers
+  default: {}
 - name: version_ids
   message:
     name: GatewayVersionIdentifiers
-  rules:
-    required: true
   default: {}
 - name: gateway_server_address
   comment: |-
@@ -212,3 +219,8 @@ fields:
 - name: disable_packet_broker_forwarding
   type: bool
   default: false
+- name: alert_notification_profile_ids
+  comment: 'next: 33'
+  message:
+    name: AlertNotificationProfileIdentifiers
+  default: {}

@@ -32,19 +32,19 @@ If the gateway is capable of communicating with a [Gateway Configuration Server]
 
 The gateway registry also stores information about the antenna(s) of the gateway, such as location and gain.
 
-For more details, see the the [gateway API reference]({{< ref "/reference/api/gateway.md" >}}).
+For more details, see the the [gateway API reference]({{< ref "/api/reference/grpc/gateway.md" >}}).
 
 ### Applications
 
 Applications are used to organize registrations and traffic of multiple end devices in once place. An application typically corresponds to a collection of end devices that are in the same deployment, or of the same type.
 
-For more details, see the the [application API reference]({{< ref "/reference/api/application.md" >}}).
+For more details, see the the [application API reference]({{< ref "/api/reference/grpc/application.md" >}}).
 
 ### End Devices
 
 The end device registry in the Identity Server stores only metadata of end devices, allowing clients such as the Console and CLI to list end devices in an application. It typically stores metadata about the brand, model, hardware, firmware and location of the end device. It also stores addresses of the Network Server, Application Server and Join Server, so that clients such as the Console and CLI know where other properties of the end device are stored.
 
-For more details, see the the [end device API reference]({{< ref "/reference/api/end_device.md" >}}).
+For more details, see the the [end device API reference]({{< ref "/api/reference/grpc/end_device.md" >}}).
 
 ### Organizations
 
@@ -65,6 +65,20 @@ Official OAuth clients can be marked as "endorsed", or can be pre-authorized for
 Federated authentication providers can be registered in the authentication provider registries. Authentication providers are registered with an ID, name and provider configuration.
 
 The authentication providers are used to allow the Identity Server to obtain the identity of a user from an external identity provider, such as an [OpenID Connect](https://openid.net/connect/) provider.
+
+### Alert Notification Receivers
+
+Alert notification receivers can be registered in the alert notification receiver registries. Alert notification receivers are registered with an ID, name and receiver configuration.
+
+The alert notification receivers are used to dispatch alert notifications to user provided endpoints.
+
+### Alert Notification Profiles
+
+Alert notification profiles bundle multiple alert notification receivers in order to allow alert notifications to be dispatched. Alert notification profiles are registered with an ID, name, and alert notification receivers.
+
+The alert notification profiles are used to dispatch alert notifications to multiple receivers.
+
+It is possible to configure a default alert notification profile which is used when no profile is configured for an entity.
 
 ## Entity Access
 
